@@ -30,7 +30,25 @@ def login():
         else:
             flash("Invalid credentials", 'danger')
     return render_template('login.html')
-        
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        conn = get_db_connection()
+        try:
+            conn.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+            conn.commit()
+            flash("User registered successfully!", "success")
+            return redirect(url_for('login'))
+        except sqlite3.IntegrityError:
+            flash("Username already exists. Try a different one.", "danger")
+        finally:
+            conn.close()
+
+    return render_template('register.html')
 
 @app.route('/employees')
 def employees():

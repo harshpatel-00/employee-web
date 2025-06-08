@@ -41,12 +41,14 @@
       <a href="/" class="btn">Home</a>
       <a href="/employees" class="btn">View Employees</a>
       <a href="/search" class="btn">Search</a>
-
+      
       {% if session.get('user') %}
       <a href="/add" class="btn">Add Employee</a>
       <a href="/logout" class="btn">Logout ({{ session['user'] }})</a>
       {% else %}
       <a href="/login" class="btn">Login</a>
+      <a href="/register" class="btn">Register</a>
+
       {% endif %}
     </nav>
 
