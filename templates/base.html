@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee Manager</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #f0f0f0;
+      }
+      h1 {
+        color: #333;
+      }
+      .btn {
+        padding: 6px 12px;
+        background: #007bff;
+        color: white;
+        border: none;
+        text-decoration: none;
+      }
+      .btn:hover {
+        background: #0056b3;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Employee Management</h1>
+    <nav>
+      <a href="/" class="btn">Home</a>
+      <a href="/employees" class="btn">View Employees</a>
+      <a href="/search" class="btn">Search</a>
+
+      {% if session.get('user') %}
+      <a href="/add" class="btn">Add Employee</a>
+      <a href="/logout" class="btn">Logout ({{ session['user'] }})</a>
+      {% else %}
+      <a href="/login" class="btn">Login</a>
+      {% endif %}
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul style="list-style: none; padding: 0">
+      {% for category, message in messages %}
+      <li
+        style="padding:10px; margin:10px 0; background-color:
+          {% if category == 'success' %}#d4edda
+          {% elif category == 'info' %}#cce5ff
+          {% elif category == 'danger' %}#f8d7da
+          {% endif %}; color:#333;"
+      >
+        {{ message }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <hr />
+    {% block content %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>All Employees</h2>
+
+{% if employees %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Position</th>
+        <th>Action</th>
+    </tr>
+    {% for emp in employees %}
+    <tr>
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.age }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.position }}</td>
+        <td><a href="/delete/{{ emp.id }}" class="btn">Delete</a>
+        <a href="/edit/{{ emp.id }}" class="btn">Edit</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No employees found.</p>
+{% endif %}
+
+{% endblock %}

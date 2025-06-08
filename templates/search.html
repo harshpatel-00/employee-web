@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Search Employees</h2>
+
+<form method="post">
+    <input type="text" name="keyword" placeholder="Enter name or position..." required>
+    <button type="submit" class="btn">Search</button>
+</form>
+
+{% if employees %}
+    <h3>Results:</h3>
+    <table>
+        <tr>
+            <th>ID</th><th>Name</th><th>Age</th><th>Email</th><th>Position</th>
+        </tr>
+        {% for emp in employees %}
+        <tr>
+            <td>{{ emp.id }}</td>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.age }}</td>
+            <td>{{ emp.email }}</td>
+            <td>{{ emp.position }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% elif employees is not none %}
+    <p>No matching employees found.</p>
+{% endif %}
+{% endblock %}
